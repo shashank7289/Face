@@ -43,11 +43,11 @@ for item in os.listdir(database) :
         lMarks = lMarks.replace("  ", " ")
         lMarks = lMarks.replace("0  0", "")
         
-        resultPath = "D:/Codes/TestData/Alignment/YaleLandmarks/" + item + '/'
-        if not os.path.exists(resultPath):
-                os.makedirs(resultPath)
+        databaseLmarks = "D:/Codes/TestData/Alignment/YaleLandmarks/" + item + '/'
+        if not os.path.exists(databaseLmarks):
+                os.makedirs(databaseLmarks)
         
-        resultName = resultPath + txtName + ".txt"
+        resultName = databaseLmarks + txtName + ".txt"
         textFile = open(resultName, "w")
         textFile.write(lMarks)
         textFile.close()

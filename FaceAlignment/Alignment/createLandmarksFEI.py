@@ -13,8 +13,10 @@ faceCascade = cv2.CascadeClassifier('D:/Codes/Libraries/opencv/sources/data/haar
 predictor_path = "D:/Codes/Libraries/dlib-19.1.0/predictor/shape_predictor_68_face_landmarks.dat"
 predictor = dlib.shape_predictor(predictor_path)
 
-database = 'D:/Codes/TestData/Cropping/Frontalized_image_FEI_database_OpenCV_only_chin_to_chin/11/'
-fileName = database  + "*.jpg"
+database = 'D:/Codes/TestData/Cropping/Frontalized_image_FEI_database/'
+databaseImages = database + '/images/'
+databaseLmarks = database + "lmarks/"
+fileName = databaseImages  + "*.jpg"
 
 for fn in glob(fileName):
 #     if '11' in fn[2:-4] or '12' in fn[2:-4] or '13' in fn[2:-4]:
@@ -43,6 +45,8 @@ for fn in glob(fileName):
             lMarks = lMarks.replace("  ", " ")
             lMarks = lMarks.replace("0  0", "")
             
-            textFile = open(database + "LMarks/" + txtName + ".txt", "w")
+            if not os.path.exists(databaseLmarks):
+                os.makedirs(databaseLmarks)
+            textFile = open(databaseLmarks + txtName + ".txt", "w")
             textFile.write(lMarks)
             textFile.close()

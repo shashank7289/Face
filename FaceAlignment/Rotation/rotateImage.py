@@ -72,14 +72,14 @@ if __name__ == '__main__':
     
     # load the original image
     database = "D:/Codes/TestData/Rotation/wholeImage/"
-    resultPath = database + "/results/"
-    if not os.path.exists(resultPath):
-            os.makedirs(resultPath)
+    databaseLmarks = database + "/results/"
+    if not os.path.exists(databaseLmarks):
+            os.makedirs(databaseLmarks)
     img_names = glob(database + '*.jpg')
     for fn in img_names:
         img = cv2.imread(fn)
         name = fn.rpartition('\\')
-        resultName = resultPath + name[2]
+        resultName = databaseLmarks + name[2]
         
         #detect face
         faces = detectFace(img)

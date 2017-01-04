@@ -93,8 +93,9 @@ def similarityTransform(inPoints, outPoints):
 
 if __name__ == '__main__':
     
-    databaseLmarks = "D:/Codes/TestData/Cropping/Frontalized_image_FEI_database_OpenCV_only_chin_to_chin/11/LMarks/"
-    databaseImages = 'D:/Codes/TestData/Cropping/Frontalized_image_FEI_database_OpenCV_only_chin_to_chin/11/'
+    database = 'D:/Codes/TestData/Cropping/Frontalized_image_FEI_database/'
+    databaseImages = database + '/images/'
+    databaseLmarks = database + '/lmarks/'
     
     # Dimensions of output image
     w = 128;
@@ -107,7 +108,8 @@ if __name__ == '__main__':
     images = readImages(databaseImages);
     
     # Eye corners
-    eyecornerDst = [(np.int(0.3*w ), np.int(h/3)), (np.int(0.7*w), np.int(h/3))];
+    eyeFactor = 0.2
+    eyecornerDst = [(np.int(eyeFactor*w ), np.int(h/3)), (np.int((1-eyeFactor)*w), np.int(h/3))];
 
     numImages = len(images)
     
@@ -125,11 +127,11 @@ if __name__ == '__main__':
         img = cv2.warpAffine(images[i], tform, (w,h));
         morphed = img * 255
         
-        resultPath = "D:/Codes/TestData/Cropping/Frontalized_image_FEI_database_OpenCV_only_chin_to_chin_results/11/"
-        if not os.path.exists(resultPath):
-            os.makedirs(resultPath)
-        
-        resultName = resultPath + face.folderName[i]
+        databaseLmarks = database + '/results/'
+        if not os.path.exists(databaseLmarks):
+            os.makedirs(databaseLmarks)
+         
+        resultName = databaseLmarks + face.folderName[i]
         cv2.imwrite(resultName, morphed)
         
 #         cv2.imshow("img",img)

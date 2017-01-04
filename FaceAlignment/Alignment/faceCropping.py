@@ -122,11 +122,11 @@ if __name__ == '__main__' :
         img = cv2.warpAffine(images[i], tform, (w,h));
         morphed = img * 255
 
-        resultPath = databaseImages + "results/"
-        if not os.path.exists(resultPath):
-            os.makedirs(resultPath)
+        databaseLmarks = databaseImages + "results/"
+        if not os.path.exists(databaseLmarks):
+            os.makedirs(databaseLmarks)
         
-        resultName = resultPath + face.folderName[i]
+        resultName = databaseLmarks + face.folderName[i]
         cv2.imwrite(resultName, morphed)
         
 #         cv2.imshow("img",img)

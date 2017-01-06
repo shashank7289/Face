@@ -13,7 +13,7 @@ import numpy as np
 class face:
     def __init__(self):
         self.leftEye = self.rightEye =  []
-        self.x = 5
+        self.x = 15 #buffer
         self.leftArr = [0] * self.x
         self.rightArr = [0] * self.x
         self.counter = 0
@@ -52,8 +52,8 @@ def distance(faceObj):
     
     faceObj.fxn(yDiffLeftEye)
     faceObj.fxn(yDiffRightEye)
-    speedFactor = 1.45 #detection performance decreases with increasing speed factor
-    avgFactor = 1.5 #detection performance increases with reducing speed factor
+    speedFactor = 1 #detection performance decreases with increasing speed factor
+    avgFactor = 1.52 #detection performance increases with reducing speed factor
     
     #condition to reject someone moving with speed
     if ((np.amax(faceObj.leftArr, 0) - np.amin(faceObj.leftArr, 0)) > (np.amax(faceObj.leftArr, 0)/speedFactor)) or (np.amax(faceObj.rightArr, 0) - np.amin(faceObj.rightArr, 0) > (np.amax(faceObj.rightArr, 0)/speedFactor)):
@@ -65,6 +65,7 @@ def distance(faceObj):
         
         #condition to include gradual changes in user position
         if yDiffLeftEye < (leftAvg/avgFactor) or yDiffRightEye < (rightAvg/avgFactor):
+            cv2.putText(img, 'Blink Detected', (10, 30),cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 3)
             winsound.Beep(1000, 250) # frequency, duration
 
 if __name__ == '__main__' :
